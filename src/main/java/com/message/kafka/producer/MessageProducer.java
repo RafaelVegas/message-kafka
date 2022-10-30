@@ -24,7 +24,7 @@ public class MessageProducer {
 
 		Producer<String, String> producer = new KafkaProducer<String, String>(properties);
 		try{ 
-			for (int i = 0; i <= 10000000; i++) {
+			for (int i = 1; i <= 10000000; i++) {
 				producer.send(new ProducerRecord<String, String>("faly-primer-topic", String.valueOf(i), "value of message"));
 			}
 			producer.flush();

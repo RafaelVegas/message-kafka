@@ -30,8 +30,13 @@ public class ThreadConsumer extends Thread {
 			while(!closed.get()) {
 				ConsumerRecords<String, String> consumerRecords = consumer.poll(Duration.ofMillis(100));
 				for (ConsumerRecord<String, String> consumerRecord : consumerRecords) {
-					log.info(" offset = " + consumerRecord.offset() + ", partition: " + consumerRecord.partition() + ", key: " +
+					log.debug(" offset = " + consumerRecord.offset() + ", partition: " + consumerRecord.partition() + ", key: " +
 							consumerRecord.key() + ", value:" + consumerRecord.value() + consumerRecord.toString());
+					
+					if( Integer.parseInt(consumerRecord.key()) % 1000000 == 0) {
+						log.info(" offset = " + consumerRecord.offset() + ", partition: " + consumerRecord.partition() + ", key: " +
+								consumerRecord.key() + ", value:" + consumerRecord.value() + consumerRecord.toString());
+					}
 				}
 			}
 		}catch (WakeupException e) {
