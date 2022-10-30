@@ -31,7 +31,7 @@ public class MessageConsumer {
 		KafkaConsumer<String, String> consumer = new KafkaConsumer<String, String>(properties); 
 		
 		try{
-			consumer.subscribe(Arrays.asList("fali-primer-topic"));			
+			consumer.subscribe(Arrays.asList("faly-primer-topic"));			
 			while(true) {
 				ConsumerRecords<String, String> consumerRecords = consumer.poll(Duration.ofMillis(100));
 				for (ConsumerRecord<String, String> consumerRecord : consumerRecords) {
