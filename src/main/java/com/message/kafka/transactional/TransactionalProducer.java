@@ -26,7 +26,7 @@ public class TransactionalProducer {
 		try{ 
 			producer.initTransactions();
 			producer.beginTransaction();
-			for (int i = 1; i <= 10000000; i++) {
+			for (int i = 1; i <= 100; i++) {
 				producer.send(new ProducerRecord<String, String>("faly-primer-topic", String.valueOf(i), "value of message"));
 			}
 			producer.commitTransaction();

@@ -21,7 +21,7 @@ public class ProducerCallback {
 		
 		properties.put("bootstrap.servers", "localhost:9092");
 		properties.put("acks", "all");
-		properties.put("transactional.id", "faly-primer-topic-id");
+		properties.put("transactional.id", "faly-topic-id");
 		properties.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
 		properties.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
 		properties.put("linger.ms", "10");
@@ -31,8 +31,8 @@ public class ProducerCallback {
 			producer.initTransactions();
 			producer.beginTransaction();
 			for (int i = 1; i <= 100; i++) {
-				producer.send(new ProducerRecord<String, String>("faly-primer-topic", (i%2 == 0) ? "key-2.1" : "key-3.1" ,
-						 "value of message " + i),new CallBacks());
+				producer.send(new ProducerRecord<String, String>("faly-topic", String.valueOf(i) ,
+						 "value " + i),new CallBacks());
 			}
 			producer.flush();
 		} catch (Exception ex) {

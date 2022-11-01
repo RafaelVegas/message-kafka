@@ -1,8 +1,6 @@
 package com.message.kafka.producer;
 
-import java.util.Iterator;
 import java.util.Properties;
-import java.util.concurrent.ExecutionException;
 
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
@@ -33,8 +31,5 @@ public class MessageProducer {
 		}finally {
 			producer.close();
 		}
-		
-		
-		
 	}
 }
