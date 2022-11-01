@@ -36,7 +36,7 @@ public class MessageConsumer {
 				ConsumerRecords<String, String> consumerRecords = consumer.poll(Duration.ofMillis(100));
 				for (ConsumerRecord<String, String> consumerRecord : consumerRecords) {
 					log.info(" offset = " + consumerRecord.offset() + ", partition: " + consumerRecord.partition() + ", key: " +
-							consumerRecord.key() + ", value:" + consumerRecord.value() + consumerRecord.toString());
+							consumerRecord.key() + ", value: " + consumerRecord.value());
 				}					
 			}
 		}catch (Exception e) {

@@ -1,14 +1,18 @@
-package com.message.kafka.transactional;
+package com.message.kafka.producer.callback;
 
 import java.util.Properties;
 
+import org.apache.kafka.clients.producer.Callback;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.clients.producer.RecordMetadata;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TransactionalProducer {
+import com.message.kafka.transactional.TransactionalProducer;
+
+public class ProducerCallback {
 	
 	public static final Logger log = LoggerFactory.getLogger(TransactionalProducer.class);
 
@@ -26,14 +30,13 @@ public class TransactionalProducer {
 		try{ 
 			producer.initTransactions();
 			producer.beginTransaction();
-			for (int i = 1; i <= 10000000; i++) {
-				producer.send(new ProducerRecord<String, String>("faly-primer-topic", String.valueOf(i), "value of message"));
+			for (int i = 1; i <= 100; i++) {
+				producer.send(new ProducerRecord<String, String>("faly-primer-topic", (i%2 == 0) ? "key-2.1" : "key-3.1" ,
+						 "value of message " + i),new CallBacks());
 			}
-			producer.commitTransaction();
 			producer.flush();
 		} catch (Exception ex) {
 			log.error("Error en el envío del producer");
-			producer.abortTransaction();
 		}finally {
 			producer.close();
 		}
